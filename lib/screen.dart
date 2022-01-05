@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:save_text_navig/cubit.dart';
 
-class Screen extends StatefulWidget {
-  const Screen({Key? key}) : super(key: key);
+class FirstScreen extends StatefulWidget {
+  const FirstScreen({Key? key}) : super(key: key);
 
   @override
-  State<Screen> createState() => _ScreenState();
+  State<FirstScreen> createState() => _FirstScreenState();
 }
 
-class _ScreenState extends State<Screen> {
+class _FirstScreenState extends State<FirstScreen> {
   late TextEditingController _controller;
   late TextEditingController _controller2;
   late TextEditingController _controller3;
@@ -20,6 +22,7 @@ class _ScreenState extends State<Screen> {
     _controller2 = TextEditingController();
     _controller3 = TextEditingController();
     _controller4 = TextEditingController();
+    context.read<RepositoryCubit>().init();
     _formKey = GlobalKey<FormState>();
     super.initState();
   }
@@ -35,61 +38,71 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextField(
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Имя',
+    return BlocListener<RepositoryCubit, Texts>(
+      listener: (context, state) {
+        setState(() {
+          _controller.text = state.text1 ?? '';
+          _controller2.text = state.text2 ?? '';
+          _controller3.text = state.text3 ?? '';
+          _controller4.text = state.text4 ?? '';
+        });
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextField(
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Имя',
+                    ),
+                    controller: _controller,
                   ),
-                  controller: _controller,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Фамилия',
+                  TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Фамилия',
+                    ),
+                    controller: _controller2,
                   ),
-                  controller: _controller2,
-                ),
-                TextFormField(
-                  validator: validator,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Отчество',
+                  TextFormField(
+                    validator: validator,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Отчество',
+                    ),
+                    controller: _controller3,
                   ),
-                  controller: _controller3,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'дата рождения',
+                  TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'дата рождения',
+                    ),
+                    controller: _controller4,
                   ),
-                  controller: _controller4,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    final isValidated =
-                        _formKey.currentState?.validate() ?? false;
-                    if (isValidated) {
-                      pushWithArguments();
-                      // Navigator.pushNamed(context, '/navigation');
-                      // context.read<RepositoryCubit>().saveText(
-                      //       _controller.text,
-                      //       _controller2.text,
-                      //       _controller3.text,
-                      //       _controller4.text,
-                      //     );
-                    }
-                  },
-                  child: const Text('Save'),
-                ),
-              ],
+                  ElevatedButton(
+                    onPressed: () {
+                      final isValidated =
+                          _formKey.currentState?.validate() ?? false;
+                      if (isValidated) {
+                        // pushWithArguments();
+                        Navigator.pushNamed(context, '/navigation');
+                        context.read<RepositoryCubit>().saveText(
+                              _controller.text,
+                              _controller2.text,
+                              _controller3.text,
+                              _controller4.text,
+                            );
+                      }
+                    },
+                    child: const Text('Save'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -97,28 +110,19 @@ class _ScreenState extends State<Screen> {
     );
   }
 
-  void pushWithArguments() {
-    final texts = Texts(
-      _controller.text,
-      _controller2.text,
-      _controller3.text,
-      _controller4.text,
-    );
-    Navigator.pushNamed(context, '/navigation', arguments: texts);
-  }
+  // void pushWithArguments() {
+  //   final texts = Texts(
+  //     _controller.text,
+  //     _controller2.text,
+  //     _controller3.text,
+  //     _controller4.text,
+  //   );
+  //   Navigator.pushNamed(context, '/navigation', arguments: texts);
+  // }
 
   String? validator(String? text) {
     if (text?.isEmpty ?? true) {
       return 'Введите текст';
     }
   }
-}
-
-class Texts {
-  Texts(this.text1, this.text2, this.text3, this.text4);
-
-  final String? text1;
-  final String? text2;
-  final String? text3;
-  final String? text4;
 }
