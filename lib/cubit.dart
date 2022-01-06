@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_text_navig/repository.dart';
 
-class RepositoryCubit extends Cubit<Texts> {
-  RepositoryCubit() : super(Texts('', '', '', ''));
+class RepositoryCubit extends Cubit<User> {
+  RepositoryCubit() : super(User('', '', '', ''));
 
   final _repository = Repository();
 
@@ -17,8 +17,8 @@ class RepositoryCubit extends Cubit<Texts> {
   }
 }
 
-class Texts {
-  Texts(this.text1, this.text2, this.text3, this.text4);
+class User {
+  User(this.text1, this.text2, this.text3, this.text4);
 
   final String? text1;
   final String? text2;

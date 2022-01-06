@@ -27,7 +27,7 @@ class _InformationState extends State<Information> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<RepositoryCubit, Texts>(
+        child: BlocBuilder<RepositoryCubit, User>(
           builder: (context, state) {
             return Column(
               children: [

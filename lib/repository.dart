@@ -29,12 +29,12 @@ class Repository {
     await _preferences.setString(_key4, text4);
   }
 
-  Texts getText() {
+  User getText() {
     final text1 = _preferences.getString(_key);
     final text2 = _preferences.getString(_key2);
     final text3 = _preferences.getString(_key3);
     final text4 = _preferences.getString(_key4);
-    final texts = Texts(text1, text2, text3, text4);
+    final texts = User(text1, text2, text3, text4);
     return texts;
   }
 }

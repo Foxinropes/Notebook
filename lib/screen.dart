@@ -38,7 +38,11 @@ class _FirstScreenState extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RepositoryCubit, Texts>(
+    _controller.clear();
+    _controller2.clear();
+    _controller3.clear();
+    _controller4.clear();
+    return BlocListener<RepositoryCubit, User>(
       listener: (context, state) {
         setState(() {
           _controller.text = state.text1 ?? '';
@@ -85,18 +89,19 @@ class _FirstScreenState extends State<FirstScreen> {
                     controller: _controller4,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       final isValidated =
                           _formKey.currentState?.validate() ?? false;
                       if (isValidated) {
-                        // pushWithArguments();
-                        Navigator.pushNamed(context, '/navigation');
-                        context.read<RepositoryCubit>().saveText(
+                        await context.read<RepositoryCubit>().saveText(
                               _controller.text,
                               _controller2.text,
                               _controller3.text,
                               _controller4.text,
                             );
+
+                        // pushWithArguments();
+                        Navigator.pushNamed(context, '/navigation');
                       }
                     },
                     child: const Text('Save'),
