@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:save_text_navig/cubit.dart';
-import 'package:save_text_navig/screen.dart';
-import 'package:save_text_navig/information.dart';
+import 'package:save_text_navig/save_user_screen.dart';
 import 'package:save_text_navig/repository.dart';
+import 'package:save_text_navig/user.dart';
+import 'package:save_text_navig/users_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,22 +13,20 @@ void main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => RepositoryCubit(),
-      child: MaterialApp(
-        // onGenerateRoute: (settings) {
-        //   if (settings.name == '/navigation') {
-        //     return MaterialPageRoute(
-        //       builder: (context) =>
-        //           Information(texts: settings.arguments as Texts),
-        //     );
-        //   }
-        // },
-        routes: {
-          '/': (context) => FirstScreen(),
-          '/navigation': (context) => Information(),
-        },
-      ),
+    return MaterialApp(
+      onGenerateRoute: (settings) {
+        if (settings.name == '/saveUser') {
+          final user = settings.arguments as User?;
+          return MaterialPageRoute(
+            builder: (context) => SaveUserScreen(
+              user: user,
+            ),
+          );
+        }
+      },
+      routes: {
+        '/': (context) => const UsersScreen(),
+      },
     );
   }
 }
