@@ -19,6 +19,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
   late TextEditingController _controller4;
   late GlobalKey<FormState> _formKey;
   late final SaveUserCubit _saveUserCubit;
+  late FocusNode myFocusNode;
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
     _controller3 = TextEditingController(text: widget.user?.text3 ?? '');
     _controller4 = TextEditingController(text: widget.user?.text4 ?? '');
     _formKey = GlobalKey<FormState>();
+    myFocusNode = FocusNode();
     super.initState();
   }
 
@@ -38,6 +40,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
     _controller2.dispose();
     _controller3.dispose();
     _controller4.dispose();
+    myFocusNode.dispose();
     super.dispose();
   }
 
@@ -72,6 +75,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                 ),
                 TextFormField(
                   textInputAction: TextInputAction.next,
+                  focusNode: myFocusNode,
                   validator: validator,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -81,8 +85,10 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                 ),
                 TextField(
                   keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
+                  maxLength: 2,
+                  maxLengthEnforced: true,
                   decoration: InputDecoration(
+                    counterText: '',
                     border: OutlineInputBorder(),
                     hintText: 'Возраст',
                   ),
@@ -139,6 +145,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
 
   String? validator(String? text) {
     if (text?.isEmpty ?? true) {
+      myFocusNode.requestFocus();
       return 'Введите текст';
     }
   }
