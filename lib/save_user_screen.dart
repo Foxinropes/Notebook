@@ -45,12 +45,16 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Form(
-            key: _formKey,
+        child: Form(
+          key: _formKey,
+          child: Container(
+            height: 320,
+            padding: EdgeInsets.only(left: 7, right: 7),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextField(
+                  textInputAction: TextInputAction.next,
                   autofocus: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -59,6 +63,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                   controller: _controller,
                 ),
                 TextField(
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Фамилия',
@@ -66,6 +71,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                   controller: _controller2,
                 ),
                 TextFormField(
+                  textInputAction: TextInputAction.next,
                   validator: validator,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -74,15 +80,32 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                   controller: _controller3,
                 ),
                 TextField(
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'дата рождения',
+                    hintText: 'Возраст',
                   ),
                   controller: _controller4,
                 ),
-                ElevatedButton(
-                  onPressed: _onButtonPressed,
-                  child: const Text('Save'),
+                GestureDetector(
+                  onTap: _onButtonPressed,
+                  child: Container(
+                    height: 40,
+                    padding: EdgeInsets.all(7),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

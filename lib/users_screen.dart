@@ -39,6 +39,7 @@ class _UsersScreenState extends State<UsersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
         onPressed: _pushScreen,
       ),
       body: SafeArea(
@@ -50,13 +51,40 @@ class _UsersScreenState extends State<UsersScreen> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () => _pushScreen(state[index]),
-                  child: Column(
-                    children: [
-                      Text(state[index].text1),
-                      Text(state[index].text2),
-                      Text(state[index].text3),
-                      Text(state[index].text4),
-                    ],
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black38)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Имя: ${state[index].text1}',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          'Фамилия: ${state[index].text2}',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          'Отчество: ${state[index].text3}',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          'Возраст: ${state[index].text4}',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
