@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:save_text_navig/favorite_icon.dart';
 import 'package:save_text_navig/user.dart';
 import 'package:save_text_navig/users_cubit.dart';
 
@@ -38,6 +39,18 @@ class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, '/favorite_user'),
+            icon: Icon(
+              Icons.favorite,
+              color: Colors.red,
+              size: 30,
+            ),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: _pushScreen,
@@ -59,11 +72,17 @@ class _UsersScreenState extends State<UsersScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Имя: ${state[index].text1}',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              'Имя: ${state[index].text1}',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Favorite(user: state[index]),
+                          ],
                         ),
                         Text(
                           'Фамилия: ${state[index].text2}',
