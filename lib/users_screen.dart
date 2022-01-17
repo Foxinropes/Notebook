@@ -2,38 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_text_navig/favorite_icon.dart';
 import 'package:save_text_navig/user.dart';
+import 'package:save_text_navig/user_widget.dart';
 import 'package:save_text_navig/users_cubit.dart';
 
 class UsersScreen extends StatefulWidget {
   const UsersScreen({Key? key}) : super(key: key);
 
   @override
-  _UsersScreenState createState() => _UsersScreenState();
+  State<UsersScreen> createState() => _UsersScreenState();
 }
 
 class _UsersScreenState extends State<UsersScreen> {
-  late final UsersCubit _usersCubit;
-
   @override
   void initState() {
-    _usersCubit = UsersCubit();
-    _usersCubit.getUsers();
+    context.read<UsersCubit>().getUsers();
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _usersCubit.close();
-    super.dispose();
-  }
-
-  void _pushScreen([User? user]) async {
+  void _pushScreen(BuildContext context, [User? user]) async {
     await Navigator.pushNamed(
       context,
       '/saveUser',
       arguments: user,
     );
-    _usersCubit.getUsers();
+    context.read<UsersCubit>().getUsers();
   }
 
   @override
@@ -42,7 +34,10 @@ class _UsersScreenState extends State<UsersScreen> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, '/favorite_user'),
+            onPressed: () async {
+              await Navigator.pushNamed(context, '/favorite_user');
+              context.read<UsersCubit>().getUsers();
+            },
             icon: Icon(
               Icons.favorite,
               color: Colors.red,
@@ -53,58 +48,16 @@ class _UsersScreenState extends State<UsersScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: _pushScreen,
+        onPressed: () => _pushScreen(context),
       ),
       body: SafeArea(
         child: BlocBuilder<UsersCubit, List<User>>(
-          bloc: _usersCubit,
           builder: (context, state) {
             return ListView.builder(
               itemCount: state.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () => _pushScreen(state[index]),
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black38)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Имя: ${state[index].text1}',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                            const Expanded(child: SizedBox()),
-                            Favorite(user: state[index]),
-                          ],
-                        ),
-                        Text(
-                          'Фамилия: ${state[index].text2}',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          'Отчество: ${state[index].text3}',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          'Возраст: ${state[index].text4}',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                return UserWidget(
+                  user: state[index],
                 );
               },
             );

@@ -18,6 +18,12 @@ class Repository {
 
   Future<void> saveUser(User user) async {
     await _preferences.setString(user.id, user.toJson());
+    await _preferences.reload();
+  }
+
+  Future<void> removeUser(User user) async {
+    await _preferences.remove(user.id);
+    await _preferences.reload();
   }
 
   Future<List<User>> getUsers() async {

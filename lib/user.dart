@@ -17,7 +17,7 @@ class User {
     this.text2 = '',
     this.text3 = '',
     this.text4 = '',
-  }) : id = id ?? _uuid.v1();
+  }) : id = id ?? _uuid.v4();
 
   User.empty() : this();
 
