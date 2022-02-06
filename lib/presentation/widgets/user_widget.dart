@@ -51,7 +51,7 @@ class UserWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _UserCredentialsText(
-                    '${l10n!.firstName}: ${user.text1}',
+                    '${l10n.firstName}: ${user.text1}',
                   ),
                   _UserCredentialsText(
                     '${l10n.lastName}: ${user.text2}',

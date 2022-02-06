@@ -69,7 +69,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                   autofocus: true,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: l10n!.firstName,
+                    hintText: l10n.firstName,
                   ),
                   controller: _controller,
                 ),
@@ -159,7 +159,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
   String? validator(String? text) {
     if (text?.isEmpty ?? true) {
       myFocusNode.requestFocus();
-      return AppLocalizations.of(context)!.enterText;
+      return AppLocalizations.of(context).enterText;
     }
     return null;
   }
