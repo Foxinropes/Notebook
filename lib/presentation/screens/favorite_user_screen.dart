@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_text_navig/domain/domain.dart';
+import 'package:save_text_navig/presentation/presentation.dart';
 import 'package:save_text_navig/utils/constrains.dart';
-
-import '../presentation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteUsersScreen extends StatefulWidget {
   const FavoriteUsersScreen({Key? key}) : super(key: key);
@@ -21,11 +21,12 @@ class _FavoriteUsersScreenState extends State<FavoriteUsersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(
-          'Favorite Users',
+          l10n.favoriteUsers,
           style: Theme.of(context).textTheme.headline1,
         ),
       ),
