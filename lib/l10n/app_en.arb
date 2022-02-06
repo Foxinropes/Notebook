@@ -1,0 +1,9 @@
+{
+    "firstName": "First name",
+    "lastName": "Last name",
+    "surName": "Surname",
+    "age":"Age",
+    "enterText": "Enter text",
+    "save": "Save",
+    "favoriteUsers":"Favorite Users"
+}

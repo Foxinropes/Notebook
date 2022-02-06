@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.save_text_navig">
    <application
-        android:label="save_text_navig"
+        android:label="Notebook"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
