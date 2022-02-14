@@ -64,41 +64,42 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextField(
+                TextFormField(
                   textInputAction: TextInputAction.next,
                   autofocus: true,
+                  focusNode: myFocusNode,
+                  validator: validator,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: l10n.firstName,
+                    hintText: l10n?.firstName,
                   ),
                   controller: _controller,
                 ),
-                TextField(
+                TextFormField(
                   textInputAction: TextInputAction.next,
+                  validator: validator,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: l10n.lastName,
+                    hintText: l10n?.lastName,
                   ),
                   controller: _controller2,
                 ),
                 TextFormField(
                   textInputAction: TextInputAction.next,
-                  focusNode: myFocusNode,
-                  validator: validator,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: l10n.surName,
+                    hintText: l10n?.surName,
                   ),
                   controller: _controller3,
                 ),
-                TextField(
+                TextFormField(
                   maxLengthEnforcement: MaxLengthEnforcement.enforced,
                   keyboardType: TextInputType.number,
                   maxLength: 2,
                   decoration: InputDecoration(
                     counterText: '',
                     border: const OutlineInputBorder(),
-                    hintText: l10n.age,
+                    hintText: l10n?.age,
                   ),
                   controller: _controller4,
                 ),
@@ -117,7 +118,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                       ),
                     ),
                     child: Text(
-                      l10n.save,
+                      l10n!.save,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -159,7 +160,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
   String? validator(String? text) {
     if (text?.isEmpty ?? true) {
       myFocusNode.requestFocus();
-      return AppLocalizations.of(context).enterText;
+      return AppLocalizations.of(context)?.enterText;
     }
     return null;
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:save_text_navig/data/repository/users_repository.dart';
 import 'package:save_text_navig/domain/entity/user.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:save_text_navig/utils/constrains.dart';
@@ -28,6 +29,7 @@ class UserWidget extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return BlocProvider(
       create: (context) => FavoriteCubit(
+        usersRepository: context.read<UsersRepositoryImpl>(),
         usersCubit: BlocProvider.of<UsersCubit>(context),
         user: user,
       ),
@@ -51,16 +53,16 @@ class UserWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _UserCredentialsText(
-                    '${l10n.firstName}: ${user.text1}',
+                    '${l10n?.firstName}: ${user.text1}',
                   ),
                   _UserCredentialsText(
-                    '${l10n.lastName}: ${user.text2}',
+                    '${l10n?.lastName}: ${user.text2}',
                   ),
                   _UserCredentialsText(
-                    '${l10n.surName}: ${user.text3}',
+                    '${l10n?.surName}: ${user.text3}',
                   ),
                   _UserCredentialsText(
-                    '${l10n.age}: ${user.text4}',
+                    '${l10n?.age}: ${user.text4}',
                   ),
                 ],
               ),

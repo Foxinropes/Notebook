@@ -7,23 +7,23 @@ class FavoriteCubit extends Cubit<bool> {
   FavoriteCubit({
     required this.user,
     required this.usersCubit,
+    required this.usersRepository,
   }) : super(user.isFavorite);
 
   final UsersCubit usersCubit;
+  final UsersRepository usersRepository;
 
   User user;
 
-  final _repository = UsersRepository();
-
   Future<void> saveFavorite() async {
     user = user.copyWith(isFavorite: !user.isFavorite);
-    await _repository.saveUser(user);
+    await usersRepository.saveUser(user);
     emit(user.isFavorite);
     await usersCubit.getUsers();
   }
 
   Future<void> removeUser() async {
-    await _repository.removeUser(user);
+    await usersRepository.removeUser(user);
     await usersCubit.getUsers();
   }
 }

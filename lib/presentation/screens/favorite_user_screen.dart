@@ -26,7 +26,7 @@ class _FavoriteUsersScreenState extends State<FavoriteUsersScreen> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(
-          l10n.favoriteUsers,
+          l10n!.favoriteUsers,
           style: Theme.of(context).textTheme.headline1,
         ),
       ),

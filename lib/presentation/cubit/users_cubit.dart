@@ -5,7 +5,7 @@ import 'package:save_text_navig/domain/entity/user.dart';
 class UsersCubit extends Cubit<List<User>> {
   UsersCubit() : super([]);
 
-  final _repository = UsersRepository();
+  final _repository = UsersRepositoryImpl();
 
   Future<void> getUsers() async {
     final listOfUsers = await _repository.getUsers();

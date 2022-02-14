@@ -14,7 +14,7 @@
             "request": "launch",
             "deviceId": "Iphone",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "debug"
         }
     ]
 }

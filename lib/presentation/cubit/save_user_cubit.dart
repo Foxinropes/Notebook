@@ -5,7 +5,7 @@ import 'package:save_text_navig/domain/domain.dart';
 class SaveUserCubit extends Cubit<User> {
   SaveUserCubit({User? user}) : super(user ?? User.empty());
 
-  final _repository = UsersRepository();
+  final _repository = UsersRepositoryImpl();
 
   void init() {
     emit(state);
