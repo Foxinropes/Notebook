@@ -5,5 +5,6 @@
     "age":"Age",
     "enterText": "Enter text",
     "save": "Save",
-    "favoriteUsers":"Favorite Users"
+    "favoriteUsers":"Favorite Users",
+    "notebook":"Notebook"
 }

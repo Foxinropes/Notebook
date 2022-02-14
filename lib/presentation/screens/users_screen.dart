@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_text_navig/utils/constrains.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../domain/domain.dart';
 import '../presentation.dart';
 
@@ -30,11 +32,12 @@ class _UsersScreenState extends State<UsersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(
-          'Notebook',
+          l10n!.notebook,
           style: Theme.of(context).textTheme.headline1,
         ),
         actions: [

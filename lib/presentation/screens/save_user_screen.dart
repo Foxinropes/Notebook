@@ -62,7 +62,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
               horizontal: AppConstrains.paddingMedium,
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextFormField(
                   textInputAction: TextInputAction.next,
